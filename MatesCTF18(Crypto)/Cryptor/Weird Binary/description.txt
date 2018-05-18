@@ -1,0 +1,1 @@
+I created some encoding algorithms to transfer messages more fastly. Decode it.
