@@ -1,0 +1,1 @@
+All the ciphertexts are encrypted from the same message with the form (c, e, n). Can you decrypt it?
