@@ -1,0 +1,1 @@
+Give me a string "s" that s[:10] == s.encode("base64")[:10]

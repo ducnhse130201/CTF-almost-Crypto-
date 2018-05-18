@@ -1,0 +1,62 @@
+Encryption steps:
+
+1. the flag is encode with base64
+	b64_flag = flag.encode('base64')
+2. with a loop convert b64_flag to enc_flag
+
+	def encode(s):
+		return (''.join([ chr(ord(c)+4) for c in s[::-1] ]))
+	=> code decode func
+	
+
+	encrypted_flag = ""
+	temp_str = ""
+	for i in b64_flag:
+		temp_str += i
+		encrypted_flag += encode(temp_str)
+
+	=> this is something like this one : 1+2+3+4+...+n
+	=> means if we can calculate len(enc_flag) we can calculate len(b64_flag)
+
+3. take every char in enc_flag and pass it to encrypt func
+
+	def encrypt(char):
+	lst = []
+	m = md5(char).hexdigest()
+	m = int(m,16)
+	m = str(hex(m))
+	for j in range(0, len(m)-3, 3):
+		lst.append((128 + ord(m[j])^ord(m[j+1]), 128 + ord(m[j+1])^ord(m[j+2]), 128 + ord(m[j+2])^ord(m[j+3])))
+	return lst
+
+4. Finally adding some pad data base on the checksum value(we can ignore this one because we can easily remove it from image's data)
+
+5. putting pixels data and make digest.png
+
+--------------------------------------------------------------------------------
+
+
+Decryption steps
+
+1. take pixels data from the image
+
+2. remove pixels data created from checksum ( check (R,B,G) > 128 base on encrypt func)
+
+3. brute-forcing every char from string.printable which have the same encrypted data with every 11 chunks in the pixels data
+
+4. now we can recover the enc_flag. Calculate len(enc_flag) and finding len(b64_flag) => b64_flag(encoded) => reserved with decode func => b64_flag => decode b64 
+
+5. We have the Flag !!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
